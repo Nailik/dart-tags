@@ -70,7 +70,13 @@ class ID3V2Reader extends Reader {
       tags[m?.key] = m?.value;
 
       offset = offset + _headerLength + len;
-      end = offset < size;
+      
+      if(m == null){
+        //when the first tag is null we go to false - we don't expect any more tags
+        end = false;
+      }else {
+        end = offset < size;
+      }
     }
 
     return tags;
